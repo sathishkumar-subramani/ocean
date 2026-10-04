@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-theme="sun">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fathom</title>
+    <style>
+      :root { --ink: #f3f6f8; --dim: rgba(243, 246, 248, 0.7); --line: rgba(243, 246, 248, 0.3); --accent: #ffb469; --bg: #04101a; }
+      [data-theme="moon"] { --accent: #9fd0ff; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
+      body { color: var(--ink); font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+      #webgl { position: fixed; inset: 0; touch-action: none; }
+      .ui { position: fixed; pointer-events: none; }
+      .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+      #shade { inset: 0; background: linear-gradient(to top, rgba(2, 8, 14, 0.62), rgba(2, 8, 14, 0.18) 36%, transparent 58%), linear-gradient(to bottom, rgba(2, 8, 14, 0.3), transparent 20%); }
+      #mark { left: 36px; top: 30px; font-size: 13px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; }
+      #mark small { display: block; margin-top: 7px; font-size: 11px; font-weight: 400; letter-spacing: 0.14em; color: var(--dim); }
+      .btn { pointer-events: auto; cursor: pointer; background: none; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 9px 18px;
+             font: 600 11px/1 ui-monospace, Consolas, monospace; letter-spacing: 0.16em; text-transform: uppercase; transition: border-color 0.3s; }
+      .btn:hover { border-color: var(--ink); }
+      #theme { right: 36px; top: 26px; }
+      #copy { left: 36px; bottom: 44px; max-width: min(430px, 80vw); }
+      #copy > * { transition: opacity 0.45s, transform 0.45s; }
+      #copy.out > * { opacity: 0; transform: translateY(10px); }
+      #copy .idx { font-size: 11px; letter-spacing: 0.22em; color: var(--accent); }
+      #copy h1 { margin: 10px 0 12px; font-size: clamp(30px, 4.6vw, 62px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
+      #copy p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--dim); }
+      #copy .hint { margin-top: 14px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+      #depth { right: 36px; bottom: 44px; text-align: right; }
+      #depth b { display: block; font-size: clamp(26px, 3.4vw, 44px); font-weight: 300; letter-spacing: -0.01em; }
+      #depth span { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+      #ticks { right: 36px; top: 50%; transform: translateY(-50%); display: grid; gap: 13px; }
+      #ticks i { display: block; height: 1px; width: 14px; margin-left: auto; background: var(--ink); opacity: 0.35; transition: width 0.4s, opacity 0.4s; }
+      #ticks i.on { width: 34px; opacity: 1; }
+      #hud { left: 36px; top: 84px; font-size: 10px; color: var(--dim); }
+      #fade, #loader { inset: 0; background: var(--bg); transition: opacity 0.45s; z-index: 4; }
+      #fade { opacity: 0; } #fade.on { opacity: 1; }
+      #loader { display: grid; place-items: center; font-size: 11px; letter-spacing: 0.3em; transition: opacity 0.9s; z-index: 5; }
+      #loader.done { opacity: 0; }
+      @media (max-width: 720px) { #mark, #copy, #hud { left: 18px; } #theme, #ticks, #depth { right: 18px; } }
+    </style>
+  </head>
+  <body>
+    <div id="webgl"></div>
+    <div id="shade" class="ui"></div>
+    <div id="mark" class="ui">Fathom<small class="mono">A descent in three parts</small></div>
+    <button id="theme" class="ui btn">Moon</button>
+    <div id="copy" class="ui"><div class="idx mono"></div><h1></h1><p></p><div class="hint mono"></div></div>
+    <div id="depth" class="ui mono"><b>0 m</b><span>Depth</span></div>
+    <div id="ticks" class="ui"></div>
+    <div id="hud" class="ui mono"></div>
+    <div id="fade" class="ui"></div>
+    <div id="loader" class="ui mono">LOADING</div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
